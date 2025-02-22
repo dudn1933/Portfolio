@@ -1,50 +1,10 @@
-# React + TypeScript + Vite
+# 포기? 그게뭐지? 성능 개선과 코드 품질 향상에 집중해온 운동하는 프론트개발자
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+모르는 것은 있을 수 있지만, 노력 앞에 불가능은 없다고 믿습니다.  
+행동하는 순간, 가능성은 곧 현실이 됩니다.
 
-Currently, two official plugins are available:
+안녕하세요, 4년 차 프론트엔드 개발자이자 끊임없이 몸과 마음을 단련하는 **이한글**입니다.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+현재 스타트업에서 실시간 환자 모니터링 CPU 사용률을 **70~94%**에서 여러 가지 연구를 통해 **4~12%**로 크게 낮추어 성능을 개선했으며, 심전도 판독 프로그램 초기 로딩시간을 **12~15초**에서 비동기를 이용해 **1~2초**로 개선한 경험이 있고, 다양한 구조를 직접 구현하고 더 나은 서비스를 위해 최적화하는 과정에서 큰 희열을 느낍니다.
 
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
-
-- Configure the top-level `parserOptions` property like this:
-
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
-
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
-
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
-
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
+저는 ‘문제의 본질’을 탐구하는 즐거움을 바탕으로, 누구나 일상에서 편리하게 사용할 수 있는 서비스를 만드는 것을 목표로 하고 있습니다.
