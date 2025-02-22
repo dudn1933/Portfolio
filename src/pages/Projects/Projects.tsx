@@ -23,21 +23,18 @@ const Projects = () => {
     if (!container) return;
 
     const handleScroll = () => {
-      const scrollPosition = (container as HTMLElement).scrollTop;
       const scrollBottom = (container as HTMLElement).scrollTop + (container as HTMLElement).offsetHeight;
-      // 실제 요소들을 찾아 위치 계산
-      const triggerPoint = (container as HTMLElement).offsetHeight * 0.5;
-
-      if (scrollPosition > triggerPoint) {
-        setIsIntroduceFirstVisible(true);
-      } else {
-        setIsIntroduceFirstVisible(false);
-      }
 
       const firstEl = (container as HTMLElement).querySelector('.first') as HTMLElement;
       const secondEl = (container as HTMLElement).querySelector('.second') as HTMLElement;
 
       const firstBottom = firstEl.offsetTop + firstEl.offsetHeight;
+
+      if (scrollBottom > firstEl.offsetTop) {
+        setIsIntroduceFirstVisible(true);
+      } else {
+        setIsIntroduceFirstVisible(false);
+      }
 
       if (scrollBottom > firstBottom) {
         setIsIntroduceSecondVisible(true);

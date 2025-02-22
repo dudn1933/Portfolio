@@ -4,27 +4,28 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 const NavBar = () => {
-  const [highlighterStyle, setHighlighterStyle] = useState({
+  const [highlighterStyle] = useState({
     top: 0,
     left: 0,
     width: 0,
     height: 0,
   });
 
-  const handleLinkStyle = (e: React.MouseEvent) => {
-    // const target = e.target as HTMLAnchorElement;
-    // if (!target.id) return;
-    // const rect = target.getBoundingClientRect();
-    // setHighlighterStyle({
-    //   top: rect.top + window.scrollY,
-    //   left: rect.left + window.scrollX,
-    //   width: rect.width / 2,
-    //   height: rect.height / 2,
-    // });
-  };
+  // const handleLinkStyle = (e: React.MouseEvent) => {
+  // const target = e.target as HTMLAnchorElement;
+  // if (!target.id) return;
+  // const rect = target.getBoundingClientRect();
+  // setHighlighterStyle({
+  //   top: rect.top + window.scrollY,
+  //   left: rect.left + window.scrollX,
+  //   width: rect.width / 2,
+  //   height: rect.height / 2,
+  // });
+  // };
 
   return (
-    <StyledNav onClick={handleLinkStyle}>
+    // onClick={handleLinkStyle}
+    <StyledNav>
       <StyledLink id="home" to="/">
         HOME
       </StyledLink>

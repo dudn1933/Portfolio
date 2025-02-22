@@ -5,7 +5,7 @@ import GlobalStyle from './styles/GlobalStyle.ts';
 import Portfolio from './App.tsx';
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
-  <Router>
+  <Router basename="/portfolio">
     <Reset />
     <GlobalStyle />
     <Portfolio />

@@ -7,8 +7,8 @@ import LetterWrapper from '../../components/LetterWrapper/LetterWrapper';
 const About = () => {
   const text = 'ABOUT ME';
   const [visibleIndexes, setVisibleIndexes] = useState<number[]>([]);
-  const [isImageVisible, setIsImageVisible] = useState(false);
   // const [isStackOpen, setIsStackOpen] = useState(false);
+  const [isImageVisible, setIsImageVisible] = useState(false);
   const [isIntroduceTitleVisible, setIsIntroduceTitleVisible] = useState(false);
   const [isIntroduceFirstVisible, setIsIntroduceFirstVisible] = useState(false);
   const [isIntroduceSecondVisible, setIsIntroduceSecondVisible] = useState(false);
@@ -30,51 +30,53 @@ const About = () => {
     if (!container) return;
 
     const handleScroll = () => {
-      const scrollPosition = (container as HTMLElement).scrollTop;
-      const triggerPoint = (container as HTMLElement).offsetHeight * 0.5;
+      const scrollBottom = (container as HTMLElement).scrollTop + (container as HTMLElement).offsetHeight;
 
-      if (scrollPosition > triggerPoint) {
+      const imageEl = (container as HTMLElement).querySelector('.scroll-image') as HTMLElement;
+      const titleEl = (container as HTMLElement).querySelector('.scroll-title') as HTMLElement;
+      const firstEl = (container as HTMLElement).querySelector('.scroll-first') as HTMLElement;
+      const secondEl = (container as HTMLElement).querySelector('.scroll-second') as HTMLElement;
+      const thirdEl = (container as HTMLElement).querySelector('.scroll-third') as HTMLElement;
+      const fourthEl = (container as HTMLElement).querySelector('.scroll-fourth') as HTMLElement;
+      const fifthEl = (container as HTMLElement).querySelector('.scroll-fifth') as HTMLElement;
+
+      if (scrollBottom > imageEl?.offsetTop) {
         setIsImageVisible(true);
       } else {
         setIsImageVisible(false);
       }
 
-      const introPoint = (container as HTMLElement).offsetHeight * 0.95;
-      const first = (container as HTMLElement).offsetHeight * 1;
-      const second = (container as HTMLElement).offsetHeight * 1.2;
-      const third = (container as HTMLElement).offsetHeight * 1.4;
-      const fourth = (container as HTMLElement).offsetHeight * 1.6;
-      const fifth = (container as HTMLElement).offsetHeight * 1.8;
-
-      if (scrollPosition > introPoint) {
+      if (scrollBottom > titleEl?.offsetTop) {
         setIsIntroduceTitleVisible(true);
       } else {
         setIsIntroduceTitleVisible(false);
       }
 
-      if (scrollPosition > first) {
+      if (scrollBottom > firstEl?.offsetTop) {
         setIsIntroduceFirstVisible(true);
       } else {
         setIsIntroduceFirstVisible(false);
       }
 
-      if (scrollPosition > second) {
+      if (scrollBottom > secondEl?.offsetTop) {
         setIsIntroduceSecondVisible(true);
       } else {
         setIsIntroduceSecondVisible(false);
       }
 
-      if (scrollPosition > third) {
+      if (scrollBottom > thirdEl?.offsetTop) {
         setIsIntroduceThirdVisible(true);
       } else {
         setIsIntroduceThirdVisible(false);
       }
-      if (scrollPosition > fourth) {
+
+      if (scrollBottom > fourthEl?.offsetTop) {
         setIsIntroduceFourthVisible(true);
       } else {
         setIsIntroduceFourthVisible(false);
       }
-      if (scrollPosition > fifth) {
+
+      if (scrollBottom > fifthEl?.offsetTop) {
         setIsIntroduceFifthVisible(true);
       } else {
         setIsIntroduceFifthVisible(false);
@@ -95,8 +97,8 @@ const About = () => {
     <Wrapper>
       <LetterWrapper text={text} visibleIndexes={visibleIndexes} />
       <ScrollContentWrapper id="content-scroll-top">
-        <PersonalInformation $isVisible={isImageVisible}>
-          <PersonalImage src="../../../public/이한글.png" alt="이한글" />
+        <PersonalInformation className="scroll-image" $isVisible={isImageVisible}>
+          <PersonalImage src="public/leehangeul.png" alt="이한글" />
           <PersonalContent>
             <Content>
               <PersonalTitle>이한글</PersonalTitle>
@@ -316,7 +318,7 @@ const About = () => {
                         <stop offset="0" stopColor="#b84e51" />
                         <stop offset="1" stopColor="#f68e48" />
                       </linearGradient>
-                      <g clip-path="url(#clip)">
+                      <g clipPath="url(#clip)">
                         <path d="M-100,-102m-28,0v300h300z" fill="url(#gradient-1)" />
                         <path d="M-100,-102m28,0h300v300z" fill="url(#gradient-3)" />
                         <path d="M-100,-102l300,300" fill="none" stroke="url(#gradient-2)" strokeWidth="40" />
@@ -357,20 +359,20 @@ const About = () => {
                   <SkillIcon>
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48">
                       <linearGradient id="~hhCEjI~ovLo7bTsUTFpDa" x1="2" x2="44" y1="34.5" y2="34.5" gradientUnits="userSpaceOnUse">
-                        <stop offset="0" stop-color="#2684ff" />
-                        <stop offset=".28" stop-color="#1f7bf6" />
-                        <stop offset=".742" stop-color="#0c62dd" />
-                        <stop offset=".994" stop-color="#0052cc" />
+                        <stop offset="0" stopColor="#2684ff" />
+                        <stop offset=".28" stopColor="#1f7bf6" />
+                        <stop offset=".742" stopColor="#0c62dd" />
+                        <stop offset=".994" stopColor="#0052cc" />
                       </linearGradient>
                       <path
                         fill="url(#~hhCEjI~ovLo7bTsUTFpDa)"
                         d="M3.589,35.049c-0.453,0.738-0.962,1.595-1.394,2.277c-0.387,0.653-0.179,1.495,0.467,1.894 l9.063,5.572c0.655,0.404,1.514,0.201,1.919-0.453c0.004-0.007,0.008-0.013,0.012-0.02c0.363-0.606,0.83-1.393,1.338-2.236 c3.59-5.92,7.201-5.196,13.713-2.089l8.986,4.269c0.695,0.331,1.527,0.036,1.858-0.659c0.006-0.012,0.012-0.025,0.017-0.037 l4.315-9.75c0.305-0.696-0.005-1.508-0.697-1.825c-1.896-0.891-5.668-2.667-9.063-4.304C21.909,21.76,11.529,22.143,3.589,35.049z"
                       />
                       <linearGradient id="~hhCEjI~ovLo7bTsUTFpDb" x1="4" x2="46" y1="12.5" y2="12.5" gradientUnits="userSpaceOnUse">
-                        <stop offset="0" stop-color="#0052cc" />
-                        <stop offset=".044" stop-color="#0255cf" />
-                        <stop offset=".665" stop-color="#1c77f2" />
-                        <stop offset="1" stop-color="#2684ff" />
+                        <stop offset="0" stopColor="#0052cc" />
+                        <stop offset=".044" stopColor="#0255cf" />
+                        <stop offset=".665" stopColor="#1c77f2" />
+                        <stop offset="1" stopColor="#2684ff" />
                       </linearGradient>
                       <path
                         fill="url(#~hhCEjI~ovLo7bTsUTFpDb)"
@@ -426,9 +428,11 @@ const About = () => {
           </PersonalContent>
         </PersonalInformation>
         <PersonalIntroduce>
-          <IntroduceTitle $isVisible={isIntroduceTitleVisible}>포기? 그게뭐지? 성능 개선과 코드 품질 향상에 집중해온 운동하는 프론트개발자</IntroduceTitle>
+          <IntroduceTitle className="scroll-title" $isVisible={isIntroduceTitleVisible}>
+            포기? 그게뭐지? 성능 개선과 코드 품질 향상에 집중해온 운동하는 프론트개발자
+          </IntroduceTitle>
           <IntroduceContent>
-            <FirstIntroduce $isVisible={isIntroduceFirstVisible}>
+            <FirstIntroduce className="scroll-first" $isVisible={isIntroduceFirstVisible}>
               모르는 것은 있을 수 있지만, 노력 앞에 불가능은 없다고 믿습니다.
               <br />
               행동하는 순간, 가능성은 곧 현실이 됩니다.
@@ -443,7 +447,7 @@ const About = () => {
             </FirstIntroduce>
             <br />
             <br />
-            <SecondIntroduce $isVisible={isIntroduceSecondVisible}>
+            <SecondIntroduce className="scroll-second" $isVisible={isIntroduceSecondVisible}>
               경력에서 가장 자랑스럽게 생각하는 것<br />
               <br />
               입사 초기에는 업무 방향성에 대해 고민이 많았지만, 지속적인 문제 해결 과정을 통해 문제를 정의하고 개선안을 도출하는 역량을 키웠습니다. 이를 토대로 성능 이슈를 해결했고, 결과적으로 두 개의
@@ -453,7 +457,7 @@ const About = () => {
             <br />
             <br />
 
-            <ThirdIntroduce $isVisible={isIntroduceThirdVisible}>
+            <ThirdIntroduce className="scroll-third" $isVisible={isIntroduceThirdVisible}>
               나만의 강점
               <br />
               <br />
@@ -462,7 +466,7 @@ const About = () => {
             </ThirdIntroduce>
             <br />
             <br />
-            <FourthIntroduce $isVisible={isIntroduceFourthVisible}>
+            <FourthIntroduce className="scroll-fourth" $isVisible={isIntroduceFourthVisible}>
               일에서 가장 중요하게 생각하는 것<br />
               <br />
               효율성과 팀 단합을 최우선으로 삼습니다. 개인 역량보다 협업을 통해 의견을 종합해 최적의 방향을 찾는 과정을 중요하게 여기며, 이 과정에서 새로운 아이디어가 탄생할 때 큰 희열을 느낍니다.
@@ -470,7 +474,7 @@ const About = () => {
             </FourthIntroduce>
             <br />
             <br />
-            <FifthIntroduce $isVisible={isIntroduceFifthVisible}>
+            <FifthIntroduce className="scroll-fifth" $isVisible={isIntroduceFifthVisible}>
               스트레스를 해결하는 방법
               <br />
               <br />
