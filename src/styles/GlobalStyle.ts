@@ -19,10 +19,10 @@ const GlobalStyle = createGlobalStyle`
         font-family: 'Pretendard', sans-serif;
     }
 
-    /* * {
+    * {
         cursor: none !important;
         user-select: none;
-    } */
+    }
 
     #root {
         width: 100%;
