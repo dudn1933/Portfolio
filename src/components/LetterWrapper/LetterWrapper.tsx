@@ -51,7 +51,7 @@ const Letter = styled.span<{ $char: string; $isVisible: boolean }>`
   transition: opacity 0.5s ease, transform 0.5s ease;
 
   /* 1270 이하이면  fontsize 10rem으로 변경 */
-  font-size: 13rem;
+  font-size: 11rem;
   color: transparent;
   background: linear-gradient(90deg, white 0%, #f78fcc 100%);
   background-size: 200% auto;
