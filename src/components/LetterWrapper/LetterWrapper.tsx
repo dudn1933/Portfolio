@@ -11,7 +11,7 @@ const LetterWrapper = ({ text, visibleIndexes }: LetterWrapperState) => {
     const target = document.querySelector('#content-scroll-top');
 
     container?.scroll({
-      top: (target as HTMLElement).offsetHeight,
+      top: (target as HTMLElement)?.offsetHeight,
       behavior: 'smooth',
     });
   };
@@ -51,7 +51,7 @@ const Letter = styled.span<{ $char: string; $isVisible: boolean }>`
   transition: opacity 0.5s ease, transform 0.5s ease;
 
   /* 1270 이하이면  fontsize 10rem으로 변경 */
-  font-size: 15rem;
+  font-size: 13rem;
   color: transparent;
   background: linear-gradient(90deg, white 0%, #f78fcc 100%);
   background-size: 200% auto;
@@ -82,8 +82,8 @@ const bounce = keyframes`
   }
 `;
 
-// 2) ClickStyled: 처음부터 애니메이션 무한 반복
 const Click = styled.div`
+  user-select: none;
   font-size: 3rem;
   margin-top: 10rem;
   color: #f78fcc;

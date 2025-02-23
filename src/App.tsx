@@ -6,8 +6,6 @@ import About from './pages/About/About';
 import Tech from './pages/Tech/Tech';
 import Projects from './pages/Projects/Projects';
 import Experience from './pages/Experience/Experience';
-import Contact from './pages/Contact/Contact';
-import Blog from './pages/Blog/Blog';
 
 const Portfolio = () => {
   return (
@@ -18,8 +16,6 @@ const Portfolio = () => {
         <Route path="/tech" element={<Tech />} />
         <Route path="/projects" element={<Projects />} />
         <Route path="/experience" element={<Experience />} />
-        <Route path="/contact" element={<Contact />} />
-        <Route path="/blog" element={<Blog />} />
       </Routes>
     </EcgLayout>
   );

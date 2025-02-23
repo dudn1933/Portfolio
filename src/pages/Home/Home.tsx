@@ -1,11 +1,17 @@
+import React from 'react';
 import { styled } from 'styled-components';
+import TypedText from './TypedText/TypedText';
 
 const Home = () => {
   return (
     <Wrapper>
       <TitleWrapper>
-        <Title>Lee Han Geul</Title>
-        <SubTitle>Front-end developer</SubTitle>
+        <Title>
+          <TypedText strings={['Lee Han Geul']} typeSpeed={100} backSpeed={50} loop={false} showCursor={true} cursorChar="|" />
+        </Title>
+        <SubTitle>
+          <TypedText strings={['Front-end developer']} typeSpeed={100} backSpeed={50} loop={false} showCursor={true} cursorChar="|" />
+        </SubTitle>
       </TitleWrapper>
     </Wrapper>
   );
@@ -17,10 +23,11 @@ const Wrapper = styled.div`
   width: 100%;
   height: 100%;
   margin: 0 auto;
-
   display: flex;
   align-items: flex-end;
   justify-content: center;
+
+  user-select: none;
 `;
 
 const TitleWrapper = styled.div`

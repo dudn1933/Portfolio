@@ -2,13 +2,18 @@ import { ReactNode, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import NavBar from '../components/NavBar/NavBar';
 import CursorFollower from '../components/CursorFollower/CursorFollower';
+import hangeul from '/hangeul.png';
+import { useLocation } from 'react-router-dom';
 
 const EcgLayout = ({ children }: { children: ReactNode }) => {
-  useEffect(() => {
-    // D3를 활용한 ECG 애니메이션 추가 가능
-  }, []);
-
+  const location = useLocation();
+  const isHome = location.pathname === '/';
   const [scrollProgress, setScrollProgress] = useState(0);
+
+  useEffect(() => {
+    const container = document.querySelector('#content-scroll') as HTMLElement;
+    if (container) container.scrollTop = 0;
+  }, [location]);
 
   useEffect(() => {
     const container = document.querySelector('#content-scroll') as HTMLElement;
@@ -31,7 +36,9 @@ const EcgLayout = ({ children }: { children: ReactNode }) => {
   }, []);
 
   return (
-    <LayoutWrapper>
+    <LayoutWrapper $isHome={isHome}>
+      {isHome && <Background src={hangeul} />}
+      {isHome && <BackgroundOverlay />} {/* 오버레이 추가 */}
       <NavBar />
       <ContentWrapper id="content-scroll">{children}</ContentWrapper>
       <EcgSvg id="ecg" />
@@ -41,16 +48,41 @@ const EcgLayout = ({ children }: { children: ReactNode }) => {
   );
 };
 
-const LayoutWrapper = styled.div`
+const LayoutWrapper = styled.div<{ $isHome: boolean }>`
   position: relative;
   width: 100%;
   height: 100%;
-  background-color: black;
+  background-color: ${({ $isHome }) => ($isHome ? 'transparent' : 'black')};
   overflow: hidden;
 `;
 
+const Background = styled.img`
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  overflow: hidden;
+`;
+
+const BackgroundOverlay = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  /* 어두운 색상의 반투명 오버레이 (opacity 0.4는 필요에 따라 조절) */
+  background-color: rgba(0, 0, 0, 0.4);
+  z-index: -0.5; /* Background 보다 위, 콘텐츠보다 아래 */
+  pointer-events: none;
+`;
+
 const ContentWrapper = styled.div`
+  position: relative;
+  z-index: 1;
   overflow-y: scroll;
+  width: 100%;
   height: calc(100vh - 144px);
   width: 100%;
   max-width: 1440px;

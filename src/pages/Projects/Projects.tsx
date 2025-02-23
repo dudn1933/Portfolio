@@ -1,6 +1,12 @@
-import { useEffect, useState } from 'react';
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { useEffect, useRef, useState } from 'react';
+import { keyframes, styled } from 'styled-components';
 import LetterWrapper from '../../components/LetterWrapper/LetterWrapper';
-import { styled } from 'styled-components';
+import Monitor from './components/Monitor/Monitor';
+import Holter from './components/Holter/Holter';
+import CRM from './components/CRM/CRM';
+import { Navigation, Pagination } from 'swiper/modules';
+import { Swiper, SwiperSlide } from 'swiper/react';
 
 const Projects = () => {
   const text = 'PROJECTS';
@@ -8,6 +14,8 @@ const Projects = () => {
   const [isIntroduceFirstVisible, setIsIntroduceFirstVisible] = useState(false);
   const [isIntroduceSecondVisible, setIsIntroduceSecondVisible] = useState(false);
   const [isIntroduceThirdVisible, setIsIntroduceThirdVisible] = useState(false);
+
+  const swiperRef = useRef<any>(null);
 
   useEffect(() => {
     text.split('').forEach((_, index) => {
@@ -60,17 +68,60 @@ const Projects = () => {
   return (
     <Wrapper>
       <LetterWrapper text={text} visibleIndexes={visibleIndexes} />
-      <ScrollContentWrapper id="content-scroll-top">
-        <LiveStudioMonitor className="first" $isVisible={isIntroduceFirstVisible}>
-          LiveStudioMonitor
-        </LiveStudioMonitor>
-        <LiveStudioHolter className="second" $isVisible={isIntroduceSecondVisible}>
-          LiveStudioHolter
-        </LiveStudioHolter>
-        <LiveStudioCRM className="third" $isVisible={isIntroduceThirdVisible}>
-          LiveStudioCRM
-        </LiveStudioCRM>
-      </ScrollContentWrapper>
+      <SwiperWrapper
+        modules={[Navigation, Pagination]}
+        direction="vertical"
+        spaceBetween={0}
+        slidesPerView={1}
+        mousewheel={{ releaseOnEdges: true }}
+        centeredSlides={true}
+        loop={false}
+        grabCursor={true}
+        speed={800}
+        onSwiper={swiper => (swiperRef.current = swiper)}
+      >
+        <SwiperSlideWrapper id="content-scroll-top" style={{ position: 'relative' }}>
+          <SlideContent>
+            <LiveStudioMonitor className="first" $isVisible={isIntroduceFirstVisible}>
+              <Monitor />
+            </LiveStudioMonitor>
+          </SlideContent>
+          <MoveButton $top="88%" onClick={() => swiperRef?.current?.slideNext()}>
+            <svg xmlns="http://www.w3.org/2000/svg" height="40px" viewBox="0 -960 960 960" width="40px" fill="#999999">
+              <path d="M480-200 240-440l46.67-46.67 193.33 193 193.33-193L720-440 480-200Zm0-248.67-240-240 46.67-46.66 193.33 193 193.33-193L720-688.67l-240 240Z" />
+            </svg>
+          </MoveButton>
+        </SwiperSlideWrapper>
+        <SwiperSlideWrapper style={{ position: 'relative' }}>
+          <MoveButton $bottom="96%" onClick={() => swiperRef?.current?.slidePrev()}>
+            <svg xmlns="http://www.w3.org/2000/svg" height="40px" viewBox="0 -960 960 960" width="40px" fill="#999999" style={{ transform: 'rotate(180deg)' }}>
+              <path d="M480-200 240-440l46.67-46.67 193.33 193 193.33-193L720-440 480-200Zm0-248.67-240-240 46.67-46.66 193.33 193 193.33-193L720-688.67l-240 240Z" />
+            </svg>
+          </MoveButton>
+          <SlideContent>
+            <LiveStudioHolter className="second" $isVisible={isIntroduceSecondVisible}>
+              <Holter />
+            </LiveStudioHolter>
+          </SlideContent>
+          <MoveButton $top="88%" onClick={() => swiperRef?.current?.slideNext()}>
+            <svg xmlns="http://www.w3.org/2000/svg" height="40px" viewBox="0 -960 960 960" width="40px" fill="#999999">
+              <path d="M480-200 240-440l46.67-46.67 193.33 193 193.33-193L720-440 480-200Zm0-248.67-240-240 46.67-46.66 193.33 193 193.33-193L720-688.67l-240 240Z" />
+            </svg>
+          </MoveButton>
+        </SwiperSlideWrapper>
+        <SwiperSlideWrapper style={{ position: 'relative' }}>
+          <SlideContent>
+            <LiveStudioCRM className="third" $isVisible={isIntroduceThirdVisible}>
+              <CRM />
+            </LiveStudioCRM>
+          </SlideContent>
+          <MoveButton $bottom="96%" onClick={() => swiperRef?.current?.slidePrev()}>
+            <svg xmlns="http://www.w3.org/2000/svg" height="40px" viewBox="0 -960 960 960" width="40px" fill="#999999" style={{ transform: 'rotate(180deg)' }}>
+              <path d="M480-200 240-440l46.67-46.67 193.33 193 193.33-193L720-440 480-200Zm0-248.67-240-240 46.67-46.66 193.33 193 193.33-193L720-688.67l-240 240Z" />
+            </svg>
+          </MoveButton>
+        </SwiperSlideWrapper>
+      </SwiperWrapper>
     </Wrapper>
   );
 };
@@ -93,12 +144,47 @@ const Wrapper = styled.div`
   padding: 0 5rem;
 `;
 
-const ScrollContentWrapper = styled.div`
-  user-select: none;
+const SwiperWrapper = styled(Swiper)`
   width: 100%;
   height: 100%;
+  overflow: hidden;
+`;
+
+const moveUpDown = keyframes`
+  0% {
+    transform: translateY(-10px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+`;
+
+const MoveButton = styled.button<{ $top?: string; $bottom?: string }>`
+  width: 100%;
+  position: absolute;
+  outline: none;
+  background-color: transparent;
+  border: 0px;
+  top: ${({ $top }) => $top};
+  bottom: ${({ $bottom }) => $bottom};
+
+  transition: all 0.3s ease;
+  animation: ${moveUpDown} 0.3s ease-in-out infinite alternate;
+`;
+
+const SwiperSlideWrapper = styled(SwiperSlide)`
   display: flex;
-  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  padding-top: 1rem;
+`;
+
+const SlideContent = styled.div`
+  width: 100%;
+  height: 100%;
+  color: white;
 `;
 
 const LiveStudioMonitor = styled.div<{ $isVisible: boolean }>`

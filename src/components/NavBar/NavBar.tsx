@@ -38,12 +38,6 @@ const NavBar = () => {
       <StyledLink id="experience" to="/experience">
         EXPERIENCE
       </StyledLink>
-      <StyledLink id="contact" to="/contact">
-        CONTACT
-      </StyledLink>
-      <StyledLink id="blog" to="/blog">
-        BLOG
-      </StyledLink>
       <Highlighter style={highlighterStyle} />
     </StyledNav>
   );
@@ -53,6 +47,7 @@ export default NavBar;
 
 const StyledNav = styled.nav`
   position: sticky;
+  z-index: 9999;
   top: 0;
   left: 0;
 
